@@ -1,7 +1,7 @@
 # 2nd-Project
 
 Description
-Search platform for restaurants in Barcelona and creating the favorite list of restaurants.
+Search platform for climbing routes in Lisbon district.
 
 
 User Stories
