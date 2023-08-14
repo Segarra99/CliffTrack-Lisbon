@@ -29,7 +29,7 @@ router.post('/list/create', fileUploader.array('climbing-route-pictures'), async
     }
 });
 
-router.get('/list/:id/edit', async(req,res)=>{
+router.get('/list/:id/edit', async(req,res)=>{ 
     try{
         const {id} = req.params;
         let chosenRoute = await ClimbingRoute.findById(id);
@@ -40,8 +40,9 @@ router.get('/list/:id/edit', async(req,res)=>{
     }
 })
 
-router.post('/list/:id/edit', async(req,res)=>{
+router.post('/list/:id/edit', fileUploader.array('climbing-route-pictures'), async(req,res)=>{
     try{
+        console.log(req.body);
         const {id} = req.params;
         const {name, grade, description, pictures, equipment} = req.body;
         await ClimbingRoute.findByIdAndUpdate(id, {name, grade, description, pictures, equipment});

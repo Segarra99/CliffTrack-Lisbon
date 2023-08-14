@@ -43,7 +43,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
   }
 
   //   ! This regular expression checks password for special characters and minimum length
-  /*
+  
   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
   if (!regex.test(password)) {
     res
@@ -53,7 +53,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
     });
     return;
   }
-  */
+ 
 
   // Create a new user - start by hashing the password
   bcrypt
@@ -64,7 +64,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
       return User.create({ username, email, password: hashedPassword });
     })
     .then((user) => {
-      res.redirect("/auth/login");
+      res.redirect("/login");
     })
     .catch((error) => {
       if (error instanceof mongoose.Error.ValidationError) {
