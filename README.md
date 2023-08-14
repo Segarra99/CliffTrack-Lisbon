@@ -85,7 +85,7 @@ Climbing.routes model
 
 ```javascript
 {
-  name: String
+  name: String,
   grade: String,
   description: String,
   pictures: [String],
@@ -101,8 +101,8 @@ Review model
 
 ```javascript
 {
-  rating: number,
-  content: string,
+  rating: Number,
+  content: String,
   picture: String
 }
 
