@@ -40,17 +40,35 @@ router.get('/list/:id/edit', async(req,res)=>{
     }
 })
 
-router.post('/list/:id/edit', fileUploader.array('climbing-route-pictures'), async(req,res)=>{
-    try{
-        console.log(req.body);
-        const {id} = req.params;
-        const {name, grade, description, pictures, equipment} = req.body;
-        await ClimbingRoute.findByIdAndUpdate(id, {name, grade, description, pictures, equipment});
-        res.redirect('/list');
+router.post('/list/:id/edit', fileUploader.array('climbing-route-pictures'), async (req, res) => {
+    const { id } = req.params;
+    const { name, grade, description, existingPictures, equipment, deletePictures } = req.body;
+  
+    // If there are new uploaded pictures, add them to the 'pictures' array
+    let pictures = existingPictures || [];
+    if (req.files) {
+      pictures = pictures.concat(req.files.map(file => file.path));
     }
-    catch(error){
-        console.log(error);
+  
+    // Remove selected pictures marked for deletion
+    if (deletePictures) {
+      for (const pictureUrl of deletePictures) {
+        // Remove the picture URL from the 'pictures' array
+        pictures = pictures.filter(picture => picture !== pictureUrl);
+  
+        // You might also want to delete the actual file from your storage here
+        // Use the 'fs' module to delete the file associated with 'pictureUrl'
+      }
     }
-})
+  
+    try {
+      await ClimbingRoute.findByIdAndUpdate(id, { name, grade, description, pictures, equipment }, { new: true });
+      res.redirect('/list');
+    } catch (error) {
+      console.log(error);
+      res.status(500).send('Error updating climbing route');
+    }
+  });
+  
 
 module.exports = router;
