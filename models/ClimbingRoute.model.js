@@ -17,7 +17,7 @@ const climbingRouteSchema = new Schema(
         required: true
       },
       pictures: {
-        type: String,
+        type: [String],
         required: true
       },
       equipment: {

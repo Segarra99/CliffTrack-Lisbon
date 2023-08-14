@@ -1,22 +1,22 @@
-<h2>Create a route</h2>
+<h2>Edit {{route.name}}</h2>
 <div class="row">
   <div class="col-md-6">
-    <form action="/list/create" method="post" enctype="multipart/form-data"> 
+    <form action="/list/{{route.id}}/edit" method="post" enctype="multipart/form-data"> 
       <div class="form-group">
         <label>Name:
-          <input type="text" name="name" class="form-control" />
+          <input type="text" name="name" class="form-control" value="{{route.name}}" />
         </label>
       </div>
 
       <div class="form-group">
         <label>Grade:
-          <input type="number" name="grade" class="form-control" />
+          <input type="number" name="grade" class="form-control" value="{{route.grade}}"/>
         </label>
       </div>
  
       <div class="form-group">
         <label>Description:
-          <textarea name="description" cols="30" rows="4" class="form-control"> </textarea>
+          <textarea name="description" cols="30" rows="4" class="form-control">{{route.description}}</textarea>
         </label>
       </div>
  
@@ -44,9 +44,8 @@
             <label for="rope" value="rope">Rope</label>
         </div>
         </fieldset>
-
  
-      <button type="submit" class="btn btn-primary">Create</button>
+      <button type="submit" class="btn btn-primary">Edit</button>
     </form>
   </div>
 </div>
