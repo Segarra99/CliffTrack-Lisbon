@@ -1,0 +1,52 @@
+<h2>Create a route</h2>
+<div class="row">
+  <div class="col-md-6">
+    <form action="/list/create" method="post" enctype="multipart/form-data"> 
+      <div class="form-group">
+        <label>Name:
+          <input type="text" name="title" class="form-control" />
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label>Grade:
+          <input type="number" name="grade" class="form-control" />
+        </label>
+      </div>
+ 
+      <div class="form-group">
+        <label>Description:
+          <textarea name="description" cols="30" rows="4" class="form-control"> </textarea>
+        </label>
+      </div>
+ 
+      <div class="form-group">
+        <label>Pictures:
+          <input type="file" name="climbing-route-pictures" class="form-control-file" multiple/>
+        </label>
+      </div>
+
+      <fieldset>
+        <legend>Equipment:</legend>
+
+        <div>
+            <input type="checkbox" id="crashpad" name="crashpad"/>
+            <label for="crashpad">Crashpad</label>
+        </div>
+
+        <div>
+            <input type="checkbox" id="harness" name="harness" />
+            <label for="harness">Harness</label>
+        </div>
+
+        <div>
+            <input type="checkbox" id="rope" name="rope" />
+            <label for="rope">Rope</label>
+        </div>
+        </fieldset>
+
+ 
+      <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+  </div>
+</div>

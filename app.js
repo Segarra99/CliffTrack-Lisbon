@@ -21,14 +21,17 @@ require("./config")(app);
 const capitalize = require("./utils/capitalize");
 const projectName = "clifftrack-lisbon";
 
-app.locals.appTitle = `${capitalize(projectName)} created with IronLauncher`;
+app.locals.appTitle = `${capitalize(projectName)}`;
 
 // 👇 Start handling routes here
 const indexRoutes = require("./routes/index.routes");
 app.use("/", indexRoutes);
 
 const authRoutes = require("./routes/auth.routes");
-app.use("/auth", authRoutes);
+app.use("/", authRoutes);
+
+const climbingRoutes = require('./routes/climbing.routes');
+app.use('/', climbingRoutes);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
