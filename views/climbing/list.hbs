@@ -5,16 +5,13 @@
         {{#each routes}}
             <div class="col-md-4">
                 <article class="route">
-                    <h2>{{name}} <small>(ID {{_id}})</small></h2>
+                    <h2>{{name}}</h2>
                     <hr>
                     <p>Grade: {{grade}}</p>
                     <p>Description: {{description}}</p>
                     <img src="{{pictures.[0]}}"/>
                     <div class="btn-group" style="width: 100%">
-                        <a href="/list/{{_id}}/edit" class="btn btn-outline-dark btn-sm">Edit Route</a>
-                        <form action='/list/{{_id}}/delete' method='post' style="margin:0">
-                            <button class="btn btn-outline-dark btn-sm" type='submit'>Delete Route</button>
-                        </form>
+                        <a href="/list/{{_id}}" class="btn btn-outline-dark btn-sm">More info</a>
                     </div>
                 </article>
             </div>

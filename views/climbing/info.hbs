@@ -1,0 +1,16 @@
+<h1>{{route.name}}</h1>
+<h6>Grade: {{route.grade}}</h6>
+<h5>Pictures:</h5>
+{{#each route.pictures}}
+    <img src="{{this}}"/>
+{{/each}}
+<p><b>Description: </b>{{route.description}}</p>
+<ul>
+    {{#each route.equipment}}
+        <li>{{this}}</li>
+    {{/each}}
+</ul>
+<a href="/list/{{route._id}}/edit" class="btn btn-outline-dark btn-sm">Edit Route</a>
+    <form action='/list/{{route._id}}/delete' method='post' style="margin:0">
+        <button class="btn btn-outline-dark btn-sm" type='submit'>Delete Route</button>
+    </form>

@@ -29,6 +29,17 @@ router.post('/list/create', fileUploader.array('climbing-route-pictures'), async
     }
 });
 
+router.get('/list/:id', async(req,res)=>{
+  try{
+    const {id} = req.params;
+    let chosenRoute = await ClimbingRoute.findById(id);
+    res.render('climbing/info', {route: chosenRoute});
+  }
+  catch(error){
+    console.log(error);
+  }
+});
+
 router.get('/list/:id/edit', async(req,res)=>{ 
     try{
         const {id} = req.params;
@@ -70,5 +81,15 @@ router.post('/list/:id/edit', fileUploader.array('climbing-route-pictures'), asy
     }
   });
   
+router.post('/list/:id/delete', async(req,res)=>{
+  try{
+    const {id} = req.params;
+    await ClimbingRoute.findByIdAndDelete(id);
+    res.redirect('/list');
+    }
+    catch(error){
+        console.log(error);
+    }
+});
 
 module.exports = router;

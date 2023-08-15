@@ -23,7 +23,7 @@
       <div class="form-group">
         <label>Pictures:
           <input type="file" name="climbing-route-pictures" class="form-control-file" multiple/>
-          {{#each pictures}}
+          {{#each route.pictures}}
           <input type="text" name="existingPictures" hidden value="{{this}}"/>
           {{/each}}
         </label>
