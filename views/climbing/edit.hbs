@@ -10,45 +10,36 @@
 
       <div class="form-group">
         <label>Grade:
-          <input type="number" name="grade" class="form-control" value="{{route.grade}}"/>
+          <input type="number" name="grade" class="form-control" value="{{route.grade}}" max="20" min="0"/>
         </label>
       </div>
- 
+
       <div class="form-group">
         <label>Description:
           <textarea name="description" cols="30" rows="4" class="form-control">{{route.description}}</textarea>
         </label>
       </div>
- 
-      <div class="form-group">
-        <label>Pictures:
-          <input type="file" name="climbing-route-pictures" class="form-control-file" multiple/>
-          {{#each route.pictures}}
-          <input type="text" name="existingPictures" hidden value="{{this}}"/>
-          {{/each}}
-        </label>
-      </div>
-
+      <a href="/edit/pictures/{{route._id}}" class="btn btn-outline-dark btn-sm">Edit Pictures</a>
       <fieldset>
         <legend>Equipment:</legend>
 
-        <div>
-            <input type="checkbox" id="crashpad" name="equipment"  value="crashpad"/>
-            <label for="crashpad">Crashpad</label>
-        </div>
-
-        <div>
-            <input type="checkbox" id="harness" name="equipment"  value="harness" />
-            <label for="harness" value="harness">Harness</label>
-        </div>
-
-        <div>
-            <input type="checkbox" id="rope" name="equipment" value="rope" />
-            <label for="rope" value="rope">Rope</label>
-        </div>
-        </fieldset>
+          {{#each allEquipments}}
+            {{#ifIn this ../route.equipment}}
+              <div>
+                <input type="checkbox" id={{this}} name="equipment"  value={{this}} checked/>
+                <label for={{this}}>{{this}}</label>
+              </div>
+              {{else}}
+               <div>
+                <input type="checkbox" id={{this}} name="equipment"  value={{this}} />
+                <label for={{this}}>{{this}}</label>
+              </div>
+            {{/ifIn}}
+        {{/each}}
+      </fieldset>
  
       <button type="submit" class="btn btn-primary">Edit</button>
     </form>
   </div>
 </div>
+<a href="/list/{{route.id}}" class="btn btn-outline-dark btn-sm">Back</a>

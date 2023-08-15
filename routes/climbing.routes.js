@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const ClimbingRoute = require('../models/ClimbingRoute.model');
 const fileUploader = require('../config/cloudinary.config');
+const isLoggedOut = require("../middleware/isLoggedOut");
+const isLoggedIn = require("../middleware/isLoggedIn");
+
 
 router.get("/list", async(req, res, next) => {
     try{
@@ -19,7 +22,6 @@ router.get('/list/create', (req,res)=>{
 
 router.post('/list/create', fileUploader.array('climbing-route-pictures'), async(req,res)=>{
     const {name, grade, description, equipment} = req.body;
-    console.log(req.body);
     try{
         await ClimbingRoute.create({name, grade, description, pictures: req.files.map(file => file.path), equipment});
         res.redirect('/list');
@@ -44,43 +46,63 @@ router.get('/list/:id/edit', async(req,res)=>{
     try{
         const {id} = req.params;
         let chosenRoute = await ClimbingRoute.findById(id);
-        res.render('climbing/edit', {route: chosenRoute});
+        const equipmentArray = ['rope', 'harness', 'crashpad']
+        res.render('climbing/edit', {route: chosenRoute, allEquipments: equipmentArray});
     }
     catch(error){
         console.log(error);
     }
 })
-
+  
 router.post('/list/:id/edit', fileUploader.array('climbing-route-pictures'), async (req, res) => {
-    const { id } = req.params;
-    const { name, grade, description, existingPictures, equipment, deletePictures } = req.body;
+  const { id } = req.params;
+  let { name, grade, description, equipment } = req.body;
+
+  if(!equipment){
+    equipment = [];
+  }
   
-    // If there are new uploaded pictures, add them to the 'pictures' array
-    let pictures = existingPictures || [];
-    if (req.files) {
-      pictures = pictures.concat(req.files.map(file => file.path));
+  try {
+    await ClimbingRoute.findByIdAndUpdate(id, { name, grade, description, equipment }, { new: true });
+      
+    if (req.files && req.files.length > 0) {
+      await ClimbingRoute.findByIdAndUpdate(id, {
+        $push: {pictures: req.files.map(file => file.path)}
+      })
     }
-  
-    // Remove selected pictures marked for deletion
-    if (deletePictures) {
-      for (const pictureUrl of deletePictures) {
-        // Remove the picture URL from the 'pictures' array
-        pictures = pictures.filter(picture => picture !== pictureUrl);
-  
-        // You might also want to delete the actual file from your storage here
-        // Use the 'fs' module to delete the file associated with 'pictureUrl'
-      }
-    }
-  
-    try {
-      await ClimbingRoute.findByIdAndUpdate(id, { name, grade, description, pictures, equipment }, { new: true });
-      res.redirect('/list');
+    res.redirect(`/list/${id}`);
     } catch (error) {
-      console.log(error);
-      res.status(500).send('Error updating climbing route');
+        console.log(error);
+        res.status(500).send('Error updating climbing route');
     }
-  });
-  
+});
+
+
+router.get('/edit/pictures/:id', async (req, res) =>{
+  try {
+    const {id} = req.params
+    const climbing = await ClimbingRoute.findById(id)
+    res.render('climbing/pictures', climbing)
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+
+router.post('/deletePicture/:id', async (req, res) => {
+  try {
+    const {id} = req.params
+    const {imgUrl} = req.body
+console.log("req.body: ",imgUrl)
+    await ClimbingRoute.findByIdAndUpdate(id, {
+      $pull: {pictures: imgUrl}
+    })
+    res.redirect(`/list/${id}/edit`);
+  } catch (error) {
+    console.log(error)
+  }
+})
+
 router.post('/list/:id/delete', async(req,res)=>{
   try{
     const {id} = req.params;

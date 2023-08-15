@@ -1,0 +1,22 @@
+<h1>Edit Pictures</h1>
+
+<form action="/list/{{id}}/edit" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label>
+            <input type="file" name="climbing-route-pictures" class="form-control-file" multiple/>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </label>
+    </div>
+</form>
+
+<form action="/deletePicture/{{_id}}" method="post">
+<div>
+    {{#each pictures}}
+    <img src={{this}} alt="">
+    <label for="imgUrl">Delete Picture</label>
+    <input type="checkbox" name="imgUrl" value={{this}} id="imgUrl">
+    <button type="submit" value="{{this}}">Delete</button>
+
+    {{/each}}
+</div>
+</form>

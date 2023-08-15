@@ -11,6 +11,8 @@ const climbingRouteSchema = new Schema(
       grade: {
         type: String,
         required: true,
+        min: 0,
+        max: 20
       },
       description: {
         type: String,
