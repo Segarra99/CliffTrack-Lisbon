@@ -28,9 +28,13 @@ const climbingRouteSchema = new Schema(
       reviews: [
         {
           type: Schema.Types.ObjectId,
-          ref: Review
+          ref: 'Review'
         }
-      ]
+      ],
+      user:{
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+      }
     },
     {
       timestamps: true,

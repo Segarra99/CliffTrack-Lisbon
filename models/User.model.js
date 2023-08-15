@@ -25,13 +25,13 @@ const userSchema = new Schema(
     favorites: [
       {
         type: Schema.Types.ObjectId,
-        ref: ClimbingRoute
+        ref: 'ClimbingRoute'
       }
     ],
     reviews: [
       {
         type: Schema.Types.ObjectId,
-        ref: Review
+        ref: 'Review'
       }
     ]
   },
