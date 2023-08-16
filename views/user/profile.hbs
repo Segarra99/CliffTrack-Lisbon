@@ -1,6 +1,8 @@
 <h1>{{user.username}}'s Profile</h1>
+<img src="{{user.picture}}"/>
+<a href="/profile/edit">Edit Profile</a>
 <div>
-    <h4>Favorites</h4>
+    <h4>Favorites:</h4>
     {{#each user.favorites}}
         <div>
             <h5>{{name}}</h5>
@@ -17,6 +19,7 @@
     <h4>Reviews:</h4>
     {{#each user.reviews}}
         <div>
+            <h5><a href="/list/{{route.[0]._id}}">{{route.[0].name}}</a>:</h5>
             <img src="{{picture}}">
             <p>{{content}}</p>
         </div>

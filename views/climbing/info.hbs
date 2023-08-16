@@ -28,8 +28,11 @@
 <h4>Leave a Review!</h4>
 <!-- Form to Create a Review -->
 
-<form action="/review/create/{{route._id}}" method="post">
+<form action="/review/create/{{route._id}}" method="post" enctype="multipart/form-data">
     <input type="hidden" name="user" value="{{user._id}}">
+    <label>Image:
+        <input type="file" name="review-picture" class="form-control-file" />
+    </label>
     <label for="content">Content</label>
     <textarea name="content" id="content" cols="30" rows="5"></textarea>
     <button type="submit">Create the review</button>
@@ -41,7 +44,9 @@
     {{#each route.reviews}}
     <div>
         <!-- Actually displaying the review -->
-        <p><span>By {{user.username}}</span>: {{content}}</p>
+        <p><a href="/profile/{{user._id}}">{{user.username}}</a>:</p>
+        <img src="{{picture}}"/>
+        <p>{{content}}</p>
         <!-- Deleting the Review -->
         {{#eq user._id ../user._id}}
         <form action="/review/delete/{{_id}}" method="post">
