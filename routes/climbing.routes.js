@@ -53,7 +53,7 @@ router.get('/list/:id', async(req,res)=>{
   }
 });
 
-router.post('/favorites/:id', async(req,res)=>{
+router.post('/favorites/:id', isLoggedIn, async(req,res)=>{
   try {
     const {id} = req.params;
     let chosenRoute = await ClimbingRoute.findById(id);
@@ -61,13 +61,29 @@ router.post('/favorites/:id', async(req,res)=>{
     if(!user.favorites.includes(chosenRoute._id)){
       user.favorites.push(chosenRoute);
       await user.save();
-    };
-    res.redirect(`/list/${id}?route=${chosenRoute._id}`);
+    }
+    res.redirect(`/list/${id}`);
   } 
   catch(error){
     console.log(error);
   }
 });
+
+router.post('/favorites/:id/remove', isLoggedIn, async(req,res)=>{
+  try{
+    const {id} = req.params;
+    let chosenRoute = await ClimbingRoute.findById(id);
+    const user = await User.findById(req.session.currentUser._id);
+    const routeIndex = user.favorites.indexOf(chosenRoute._id);
+    if(routeIndex !== -1){
+      user.favorites.splice(routeIndex, 1);
+      await user.save();
+    }
+    res.redirect(`/list/${id}`);
+  } catch(error){
+    console.log(error);
+  }
+})
 
 router.get('/list/:id/edit', async(req,res)=>{ 
     try{
