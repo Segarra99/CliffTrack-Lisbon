@@ -20,6 +20,11 @@ hbs.registerHelper('ifIn', function(elem, list, options) {
     return options.inverse(this);
 });
 
+hbs.registerHelper('eq', function( a, b ){
+	var next =  arguments[arguments.length-1];
+	return (a === b) ? next.fn(this) : next.inverse(this);
+});
+
 const app = express();
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware

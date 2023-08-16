@@ -1,8 +1,11 @@
 <section class="container">
     <h1>Climbing Route list</h1>
     <hr>
+    {{#if user}}
     <a href="/list/create">Create route</a>
     <hr>
+    {{/if}}
+
     <div class="row">
         {{#each routes}}
             <div class="col-md-4">

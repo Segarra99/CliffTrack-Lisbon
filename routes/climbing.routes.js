@@ -11,7 +11,11 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 router.get("/list", async(req, res, next) => {
     try{
         let routesDb = await ClimbingRoute.find()
-        res.render("climbing/list", {routes: routesDb});
+        let user = null;
+        if (req.session.currentUser){
+          user = await User.findById(req.session.currentUser._id);
+        }
+        res.render("climbing/list", {routes: routesDb, user});
     }
     catch(error){
         console.log(error);
@@ -37,7 +41,12 @@ router.get('/list/:id', async(req,res)=>{
   try{
     const {id} = req.params;
     let chosenRoute = await ClimbingRoute.findById(id);
-    const users = await User.find();
+    let isFavorite = false;
+    let user = null;
+    if (req.session.currentUser){
+      user = await User.findById(req.session.currentUser._id);
+      isFavorite = user.favorites.includes(chosenRoute._id);
+    }
     await chosenRoute.populate('reviews user');
     await chosenRoute.populate({
       path:'reviews',
@@ -46,7 +55,7 @@ router.get('/list/:id', async(req,res)=>{
         model: 'User'
       }
     });
-    res.render('climbing/info', {route: chosenRoute, users});
+    res.render('climbing/info', {route: chosenRoute, user, isFavorite});
   }
   catch(error){
     console.log(error);
@@ -58,7 +67,7 @@ router.post('/favorites/:id', isLoggedIn, async(req,res)=>{
     const {id} = req.params;
     let chosenRoute = await ClimbingRoute.findById(id);
     const user = await User.findById(req.session.currentUser._id);
-    if(!user.favorites.includes(chosenRoute._id)){
+    if(!user.favorites.includes(chosenRoute)){
       user.favorites.push(chosenRoute);
       await user.save();
     }
@@ -161,8 +170,10 @@ try {
   const {routeId} = req.params;
   const {content, picture, user} = req.body;
   const newReview = await Review.create({content, picture, user});
-  const routeUpdate = await ClimbingRoute.findByIdAndUpdate(routeId, {$push: {reviews: newReview._id}});
-  const userUpdate = await User.findByIdAndUpdate(user, {$push: {reviews: newReview._id}});
+  const reviewUser = User.findById(req.session.currentUser._id);
+  const userId = reviewUser._id;
+  const routeUpdate = await ClimbingRoute.findByIdAndUpdate(routeId, {$push: {reviews: newReview}});
+  const userUpdate = await User.findByIdAndUpdate(user, {$push: {reviews: newReview}});
   res.redirect(`/list/${routeId}`);
 } 
 catch(error){
@@ -174,8 +185,8 @@ router.post('/review/delete/:reviewId', async(req,res)=>{
   const {reviewId} = req.params;
   try {
     const removedReview = await Review.findByIdAndUpdate(reviewId);
-    await User.findByIdAndUpdate(removedReview.user,{$pull: {reviews: removedReview._id}});
-    await Review.findByIdAndDelete(removedReview._id);
+    await User.findByIdAndUpdate(removedReview.user,{$pull: {reviews: removedReview}});
+    await Review.findByIdAndDelete(removedReview);
     res.redirect('/list');
   } 
   catch(error){
