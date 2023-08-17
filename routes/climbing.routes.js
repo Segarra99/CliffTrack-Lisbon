@@ -7,7 +7,10 @@ const fileUploader = require('../config/cloudinary.config');
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
-
+// This is the route for the home page ("/")
+router.get("/", async (req, res) => {
+  res.render("home", { title: "Welcome to My App" });
+});
 router.get("/list", async(req, res, next) => {
     try{
         let routesDb = await ClimbingRoute.find()
