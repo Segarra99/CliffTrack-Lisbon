@@ -10,42 +10,50 @@
         <li>{{this}}</li>
     {{/each}}
 </ul>
+{{#if user}}
 <a href="/list/{{route._id}}/edit" class="btn btn-outline-dark btn-sm">Edit Route</a>
     <form action='/list/{{route._id}}/delete' method='post' style="margin:0">
         <button class="btn btn-outline-dark btn-sm" type='submit'>Delete Route</button>
     </form>
-
+{{#if isFavorite}}
+<form action="/favorites/{{route._id}}/remove" method="post">
+    <button type="submit">Remove from favorites</button>
+</form>
+{{else}}
+<form action="/favorites/{{route._id}}" method="post">
+    <button type="submit">Add to favorites</button>
+</form>
+{{/if}}
 <!-- Review Section -->
 <h4>Leave a Review!</h4>
 <!-- Form to Create a Review -->
-<form action="/review/create/{{route._id}}" method="post">
-    <select name="user">
-        {{#each users}}
-            <option value="{{_id}}">{{username}}</option>
-        {{/each}}
-        <!-- albums.[0] -->
-        
-    </select>
+
+<form action="/review/create/{{route._id}}" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="user" value="{{user._id}}">
+    <label>Image:
+        <input type="file" name="review-picture" class="form-control-file" />
+    </label>
     <label for="content">Content</label>
     <textarea name="content" id="content" cols="30" rows="5"></textarea>
     <button type="submit">Create the review</button>
 </form>
-<!-- End of the Form to Create a Review -->
 <br>
+{{/if}}
 <!-- Display all the Reviews of the Book that we're seeing -->
+<h5>Reviews:</h5>
     {{#each route.reviews}}
     <div>
         <!-- Actually displaying the review -->
-        <p><span>By {{user.username}}</span>: {{content}}</p>
+        <p><a href="/profile/{{user._id}}">{{user.username}}</a>:</p>
+        <img src="{{picture}}"/>
+        <p>{{content}}</p>
         <!-- Deleting the Review -->
+        {{#eq user._id ../user._id}}
         <form action="/review/delete/{{_id}}" method="post">
             <button type="submit">Delete</button>
         </form>
+        {{/eq}}
     </div>
     {{/each}}
 <br>
 <a href="/list">Return</a>
-
-<form action="/favorites/{{route._id}}" method="post">
-    <button type="submit">Add to favorites</button>
-</form>

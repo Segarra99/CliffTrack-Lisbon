@@ -1,0 +1,27 @@
+<h1>{{user.username}}'s Profile</h1>
+<img src="{{user.picture}}"/>
+<a href="/profile/edit">Edit Profile</a>
+<div>
+    <h4>Favorites:</h4>
+    {{#each user.favorites}}
+        <div>
+            <h5>{{name}}</h5>
+            <p>{{grade}}</p>
+            <p>{{description}}</p>
+            <img src="{{pictures.[0]}}"/>
+            <div class="btn-group" style="width: 100%">
+                <a href="/list/{{_id}}" class="btn btn-outline-dark btn-sm">More info</a>
+            </div>
+        </div>
+    {{/each}}
+</div>
+<div>
+    <h4>Reviews:</h4>
+    {{#each user.reviews}}
+        <div>
+            <h5><a href="/list/{{route.[0]._id}}">{{route.[0].name}}</a>:</h5>
+            <img src="{{picture}}">
+            <p>{{content}}</p>
+        </div>
+    {{/each}}
+</div>

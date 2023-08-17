@@ -22,6 +22,9 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    picture: {
+      type: String
+    },
     favorites: [
       {
         type: Schema.Types.ObjectId,
