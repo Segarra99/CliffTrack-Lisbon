@@ -34,6 +34,7 @@ h1 {
 }
 
 .carousel-item img{
+  min-height: 800px;
   max-height: 800px;
   filter: brightness(80%);
   width: 90%;
@@ -224,4 +225,28 @@ nav {
 .scrollable-favorites{
   display:flex;
   overflow-x: auto;
+}
+
+.homepage-text{
+  width: 70%;
+  align-items: center;
+}
+
+.homepage-text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-left: 450px;
+  margin-right: auto;
+}
+
+.homepage-text {
+  font-size: 24px;
+  color: #ffffff;
+  /* Optional styling */
+  background-color: #5a5a5a;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

@@ -4,7 +4,7 @@
       <img src="{{route.pictures.[0]}}" class="d-block w-100" alt="picture">
       <div class="carousel-caption d-none d-md-block">
         <h1><b>{{route.name}}</b></h1>
-        <p><b>V{{route.grade}}</b></p>
+        <p><b>Grade: V{{route.grade}}</b></p>
         <p>{{route.description}}</p>
         <h3 class="equipment"><b>Equipment:</b></h3>
             {{#each route.equipment}}
@@ -18,7 +18,7 @@
       <img src="{{this}}" class="d-block w-100" alt="picture">
       <div class="carousel-caption d-none d-md-block">
         <h1><b>{{../route.name}}</b></h1>
-        <p><b>V{{../route.grade}}</b></p>
+        <p><b>Grade: V{{../route.grade}}</b></p>
         <p>{{../route.description}}</p>
         <h3 class="equipment"><b>Equipment:</b></h3>
             {{#each ../route.equipment}}

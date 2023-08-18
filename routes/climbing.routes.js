@@ -87,7 +87,7 @@ router.get('/list/:id/edit', isLoggedIn, async(req,res)=>{
     try{
         const {id} = req.params;
         let chosenRoute = await ClimbingRoute.findById(id);
-        const equipmentArray = ['rope', 'harness', 'crashpad']
+        const equipmentArray = ['Rope', 'Harness', 'Crashpad']
         res.render('climbing/edit', {route: chosenRoute, allEquipments: equipmentArray});
     }
     catch(error){
