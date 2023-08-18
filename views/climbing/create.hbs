@@ -1,52 +1,67 @@
-<h2>Create a route</h2>
+<h2 class="signup-title">Create a route</h2>
 <div class="row">
-  <div class="col-md-6">
+  <div class="signup-container">
     <form action="/list/create" method="post" enctype="multipart/form-data"> 
-      <div class="form-group">
-        <label>Name:
-          <input type="text" name="name" class="form-control" />
-        </label>
+      <div class="form-group signup">
+          <input type="text" name="name" class="form-control mb-3" placeholder="Name"/>
       </div>
 
-      <div class="form-group">
-        <label>Grade:
-          <input type="number" name="grade" class="form-control" max="20" min="0" />
-        </label>
+      <div class="input-group mb-3 form-group">
+        <select name="grade" class="form-select form-control" id="grade">
+          <option selected>Grade</option>
+          <option value="0">V0</option>
+          <option value="1">V1</option>
+          <option value="2">V2</option>
+          <option value="3">V3</option>
+          <option value="4">V4</option>
+          <option value="5">V5</option>
+          <option value="6">V6</option>
+          <option value="7">V7</option>
+          <option value="8">V8</option>
+          <option value="9">V9</option>
+          <option value="10">V10</option>
+          <option value="11">V11</option>
+          <option value="12">V12</option>
+          <option value="13">V13</option>
+          <option value="14">V14</option>
+          <option value="15">V15</option>
+          <option value="16">V16</option>
+          <option value="17">V17</option>
+        </select>
       </div>
+
  
       <div class="form-group">
-        <label>Description:
-          <textarea name="description" cols="30" rows="4" class="form-control"> </textarea>
-        </label>
+          <textarea name="description" cols="40" rows="4" class="form-control" placeholder="Description"></textarea>
       </div>
- 
+
       <div class="form-group">
-        <label>Pictures:
-          <input type="file" name="climbing-route-pictures" class="form-control-file" multiple/>
-        </label>
+        <label class="form-label mt-2">Pictures</label>
+            <input type="file" name="climbing-route-pictures" class="form-control-file form-control" multiple/>
       </div>
-
-      <fieldset>
-        <legend>Equipment:</legend>
-
-        <div>
-            <input type="checkbox" id="crashpad" name="equipment"  value="crashpad"/>
-            <label for="crashpad">Crashpad</label>
+        <h4 class="mt-3">Equipment</h3>
+        <div class="form-check mt-2">
+          <input class="form-check-input" type="checkbox" value="crashpad" id="crashpad" name="equipment">
+          <label class="form-check-label" for="flexCheckDefault">
+            Crashpad
+          </label>
         </div>
-
-        <div>
-            <input type="checkbox" id="harness" name="equipment"  value="harness" />
-            <label for="harness" value="harness">Harness</label>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="harness" id="harness" name="equipment">
+          <label class="form-check-label" for="flexCheckDefault">
+            Harness
+          </label>
         </div>
-
-        <div>
-            <input type="checkbox" id="rope" name="equipment" value="rope" />
-            <label for="rope" value="rope">Rope</label>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="rope" id="rope" name="equipment">
+          <label class="form-check-label" for="flexCheckDefault">
+            Rope
+          </label>
         </div>
-        </fieldset>
-
- 
-      <button type="submit" class="btn btn-primary">Create</button>
+      <div class="d-flex flex-direction-row mt-3">
+      <button type="submit" class="btn btn-outline-success me-3">Create</button>
+      <a href="/list" class="btn btn-outline-info">Back</a>
+      </div>
     </form>
   </div>
 </div>

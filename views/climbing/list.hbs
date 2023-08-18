@@ -1,24 +1,25 @@
-<section class="container">
-    <h1>Climbing Route list</h1>
+<section class="container scrollbar-info">
+    <h1 class="list-title">Climbing Route list{{#if user}} <a href="/list/create" class="btn btn-outline-success create-route ms-5 mt-0 mb-1">Create route</a>{{/if}}</h1>
     <hr>
-    {{#if user}}
-    <a href="/list/create">Create route</a>
-    <hr>
-    {{/if}}
-
-    <div class="row">
+    <div class="container d-flex flex-direction-row flex-wrap justify-content-start list-container">
         {{#each routes}}
-            <div class="col-md-4">
-                <article class="route">
-                    <h2>{{name}}</h2>
-                    <hr>
-                    <p>Grade: {{grade}}</p>
-                    <p>Description: {{description}}</p>
-                    <img src="{{pictures.[0]}}"/>
-                    <div class="btn-group" style="width: 100%">
-                        <a href="/list/{{_id}}" class="btn btn-outline-dark btn-sm">More info</a>
+            <div class="list-card">
+                <div class="card bg-dark border-info list-card" style="width: 24rem;">
+                <img src="{{pictures.[0]}}" class="card-img-top" alt="picture" height="350px">
+                <div class="card-body text-light">
+                    <h3 class="card-text">{{name}}</h3>
+                    <p class="card-text">Grade: V{{grade}}</p>
+
+                    
+                        <p class="scrollable-list-item">{{description}}</p>
+
+
+
+                        <form action="/list/{{_id}}" class="btn btn-outline-dark btn-sm card-button" method="get">
+                            <button class="btn btn-outline-warning" type="submit">More Info</button>
+                        </form>
                     </div>
-                </article>
+                </div>
             </div>
         {{/each}}
     </div>

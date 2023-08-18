@@ -1,26 +1,22 @@
-<div id="form">
-  <h2>Sign Up</h2>
-  <form action="/signup" method="POST" enctype="multipart/form-data">
+<div id="form" class="signup-container">
+  <h2 class="signup-title">Sign Up</h2>
+  <form action="/signup" method="POST" enctype="multipart/form-data" class="signup">
 
-    <label> Username
-      <input type="text" name="username" placeholder="Your username" />
-    </label>
+    <label class="form-label">Username</label>
+      <input class="form-control" type="text" name="username" placeholder="Your username" />
 
     <div class="form-group">
-        <label>Profile Picture:
-            <input type="file" name="profile-picture" class="form-control-file"/>
-        </label>
+        <label class="form-label">Profile Picture</label>
+            <input type="file" name="profile-picture" class="form-control-file form-control"/>
       </div>
 
-    <label> Email
-      <input type="email" name="email" placeholder="Your email" />
-    </label>
+    <label class="form-label">Email</label>
+      <input class="form-control" type="email" name="email" placeholder="Your email" />
 
-    <label> Password
-      <input type="password" name="password" placeholder="Your password" />
-    </label>
+    <label class="form-label">Password</label>
+      <input class="form-control" type="password" name="password" placeholder="Your password" />
 
-    <button type="submit">Sign Up</button>
+    <button class="btn btn-outline-success" type="submit">Sign Up</button>
 
 
     {{#if errorMessage}}

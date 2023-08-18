@@ -1,6 +1,6 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 a {
@@ -9,4 +9,218 @@ a {
 
 h1 {
   color: 15px;
+}
+
+.card{
+  margin-bottom: 40px;
+}
+
+.review-button{
+  margin-bottom: 20px;
+}
+
+#reviews-list-lable{
+  text-align: center;
+}
+
+.carousel {
+  width: 90%;
+  margin: auto;
+}
+
+.carousel-inner img {
+  margin: auto;
+}
+
+.carousel-item img{
+  max-height: 800px;
+  filter: brightness(80%);
+  width: 90%;
+}
+
+nav {
+  margin-bottom: 6px;
+  border-bottom: 1px solid rgb(63, 63, 63);
+  background-image: url(/public/images/pngegg.png);
+}
+
+.navbar-brand{
+  margin-left: 95px;
+}
+
+.carousel-caption {
+  position: absolute;
+  top:200px
+}
+
+.carousel-caption li{
+  list-style: none;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.buttons div {
+  margin-right: 10px;
+}
+
+.user-buttons{
+  display: flex;
+  flex-direction: row;
+  right: 10px;
+}
+
+.favorite-review{
+  display: flex;
+  flex-direction: row;
+}
+
+.scrollable-list-item {
+  height: 100px;
+  overflow-y: auto;
+}
+
+.scrollable-list-item-review {
+  height: 70px;
+  overflow-y: auto;
+}
+
+.card-button{
+  height: 30px;
+}
+
+.card-button-profile button{
+  margin-top: -10px;
+  margin-left: 105px;
+}
+
+.card-button button{
+  margin-top: -10px;
+  margin-left: 120px;
+}
+
+.profile-pic-card{
+  margin-right: 10px;
+}
+
+.profile-name-card{
+  color: white;
+  text-decoration: none;
+}
+
+.modal-content{
+  background-color: #272727;
+}
+
+.create-route{
+  margin-bottom: 20px;
+  margin-left: 10px;
+}
+
+.list-title{
+  text-align: center;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.equipment{
+  margin-top: 100px;
+}
+
+.list-card{
+  margin-right: 20px;
+}
+
+.list-container{
+  margin-left: 20px;
+}
+
+.signup input{
+  margin-bottom: 10px;
+  width: 700px;
+}
+
+.signup-title{
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.signup-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.create-review-title{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 2px rgb(255, 255, 255);
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color:#4aeaff;
+  -webkit-box-shadow: inset 0 0 6px rgba(90,90,90,0.7);
+}
+
+.delete-pictures{
+  display: flex;
+  align-content: center;
+  justify-content: start;
+}
+
+.card-delete{
+  margin: 20px;
+  width: 400px;
+}
+
+.check-delete{
+  margin-left: 135px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.profileBoxes{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+
+.hr-jardado{
+  margin-bottom: -17;
+}
+
+.card-favorite{
+  margin-top: 40px;
+  margin-bottom: 5px;
+}
+
+.scrollable-div {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.scrollable-favorites{
+  display:flex;
+  overflow-x: auto;
 }

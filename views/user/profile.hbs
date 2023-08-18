@@ -1,27 +1,74 @@
-<h1>{{user.username}}'s Profile</h1>
-<img src="{{user.picture}}"/>
-<a href="/profile/edit">Edit Profile</a>
 <div>
-    <h4>Favorites:</h4>
-    {{#each user.favorites}}
+    <div class="d-flex flex-direction-row justify-content-center">
+    <img src="{{profileUser.picture}}" width="400px" height="400px" class="mt-5"/>
+    </div>
+    
+    <h1 class="text-center">{{profileUser.username}}</h1>
+    
+
+    <div class="d-flex flex-direction-row justify-content-center">
         <div>
-            <h5>{{name}}</h5>
-            <p>{{grade}}</p>
-            <p>{{description}}</p>
-            <img src="{{pictures.[0]}}"/>
-            <div class="btn-group" style="width: 100%">
-                <a href="/list/{{_id}}" class="btn btn-outline-dark btn-sm">More info</a>
+            <button class="btn btn-outline-danger me-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFavorite" aria-expanded="false" aria-controls="collapseFavorite">
+                Favorites
+            </button>
+        </div>
+        <div>
+            <button class="btn btn-outline-info" type="button" data-bs-toggle="offcanvas" data-bs-target="#reviews-list" aria-controls="reviews-list">
+            Reviews
+            </button>
+        </div>
+        {{#ifCond user.username profileUser.username}}
+        <a href="/profile/edit" class="btn btn-outline-warning ms-3">Edit Profile</a>
+        {{/ifCond}}
+    </div>
+    <hr class="hr-jardado">
+    <div class="d-flex flex-direction-row flex-nowrap justify-content-start list-container profileBoxes scrollable-favorites" id="collapseFavorites">
+        {{#each profileUser.favorites}}
+            <div class="list-card collapse" id="collapseFavorite">
+                <div class="card card-favorite bg-dark border-info list-card" style="width: 22rem;">
+                    <img src="{{pictures.[0]}}" class="card-img-top" alt="picture" height="350px">
+                    <div class="card-body text-light">
+                        <h3 class="card-text">{{name}}</h3>
+                        <p class="card-text">Grade: V{{grade}}</p>
+                        <p class="scrollable-list-item">{{description}}</p>
+                        <form action="/list/{{_id}}" class="btn btn-outline-dark btn-sm card-button-profile" method="get">
+                            <button class="btn btn-outline-warning" type="submit">More Info</button>
+                        </form>
+                    </div>
+                </div>
             </div>
+        {{/each}}
+    </div>
+    <hr>
+
+
+
+<div class="offcanvas offcanvas-start text-bg-dark" data-bs-scroll="true" tabindex="-1" id="reviews-list" aria-labelledby="reviews-list">
+  <div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="reviews-list-label">Reviews</h2>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">  
+    <div>
+      {{#each profileUser.reviews}}
+      <div>
+        <div class="card bg-dark border-info" style="width: 22rem;">
+        <img src="{{picture}}" class="card-img-top" alt="picture">
+        <div class="card-body text-light">
+            <p class="card-text scrollable-list-item-review">{{content}}</p>
+            <a href="/profile/{{user._id}}"><img src="{{user.picture}}" class="profile-pic-card" width="40px" height="40px"/></a>
+            <a href="/profile/{{user._id}}" class="profile-name-card">{{user.username}}</a>
+            </div>
+            {{#ifCond ../profileUser.username ../user.username}}
+            <div class="card-body">
+                <form action="/review/delete/{{_id}}" method="post">
+                    <button class="btn btn-outline-danger" type="submit">Delete</button>
+                </form>
+            </div>
+            {{/ifCond}}
         </div>
-    {{/each}}
-</div>
-<div>
-    <h4>Reviews:</h4>
-    {{#each user.reviews}}
-        <div>
-            <h5><a href="/list/{{route.[0]._id}}">{{route.[0].name}}</a>:</h5>
-            <img src="{{picture}}">
-            <p>{{content}}</p>
-        </div>
-    {{/each}}
+      </div>
+      {{/each}}
+    </div>
+  </div>
 </div>

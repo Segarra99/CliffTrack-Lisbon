@@ -17,6 +17,17 @@ const fileUploader = require('../config/cloudinary.config');
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
+function setLayout(req, res, next) {
+  if (req.session.currentUser) {
+      res.locals.layout = 'layoutWithUser'; // Layout for logged-in users
+  } else {
+      res.locals.layout = 'layoutWithoutUser'; // Layout for non-logged-in users
+  }
+  next();
+}
+
+router.use(setLayout);
+
 // GET /auth/signup
 router.get("/signup", isLoggedOut, (req, res) => {
   res.render("auth/signup");

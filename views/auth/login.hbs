@@ -1,16 +1,14 @@
-<div id="login-form">
-  <h2>Log In</h2>
+<div id="login-form" class="signup-container">
+  <h2 class="signup-title">Log In</h2>
   <form action="/login" method="POST">
 
-    <label> Username
-      <input type="text" name="username" placeholder="Your username" />
-    </label>
+    <label class="form-label">Username</label>
+      <input class="form-control" type="text" name="username" placeholder="Your username" />
 
-    <label> Password
-      <input type="password" name="password" placeholder="Your password" />
-    </label>
+    <label class="form-label mt-3">Password</label>
+      <input class="form-control" type="password" name="password" placeholder="Your password" />
 
-    <button type="submit">Log In</button>
+    <button class="btn btn-outline-warning mt-3" type="submit">Log In</button>
 
 
     {{#if errorMessage}}
