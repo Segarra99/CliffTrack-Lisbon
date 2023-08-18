@@ -1,15 +1,10 @@
 body {
-<<<<<<< HEAD
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   overflow-x: hidden;
 }
 
 a {
   color: #00b7ff;
-=======
-  margin: 0;
-  padding: 0;
->>>>>>> 0cc28ef66d302dc3f3b8481c0c42f6c92b13c1e6
 }
 
 h1 {
@@ -17,7 +12,6 @@ h1 {
   text-align: center;
 }
 
-<<<<<<< HEAD
 .card{
   margin-bottom: 40px;
 }
@@ -231,39 +225,3 @@ nav {
   display:flex;
   overflow-x: auto;
 }
-=======
-.container {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-gap: 10px;
-  padding: 20px;
-}
-
-.map {
-  width: 500px;
-  height: 600px;
-
-}
-.locations {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 10px;
-  padding: 10px;
-  background-color: azure;
-}
-
-.location div image {
-  width: 100px;
-}
-.locations div image:hover {
-  opacity: 0.5;
-}
-
-p {
-  text-align: right;
-  margin-right: 10px;
-  font-size: 20px;
-  
-}
-
->>>>>>> 0cc28ef66d302dc3f3b8481c0c42f6c92b13c1e6
