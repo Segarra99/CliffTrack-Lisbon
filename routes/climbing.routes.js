@@ -17,7 +17,10 @@ function setLayout(req, res, next) {
 
 router.use(setLayout);
 
-
+// This is the route for the home page ("/")
+router.get("/", async (req, res) => {
+  res.render("home", { title: "Welcome to My App" });
+});
 router.get("/list", async(req, res, next) => {
     try{
         let routesDb = await ClimbingRoute.find()
